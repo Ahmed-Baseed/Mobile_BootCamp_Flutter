@@ -24,31 +24,43 @@ class _RandomAnimationState extends State<RandomAnimation> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  height: h,
-                  width: w,
-                  color: Colors.amber,
-                ),
+                Container(height: h, width: w, color: color),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                  ElevatedButton(onPressed: () {
-                    Random random = Random();
+                    ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            Random random = Random();
+                            w = random.nextInt(300).toDouble();
+                            h = random.nextInt(300).toDouble();
+                          });
+                        },
+                        child: Icon(Icons.photo_size_select_large_sharp)),
+                    ElevatedButton(
+                        onPressed: () {
+                          Random random = Random();
 
-                    setState(() {
-                      w = random.nextInt(300).toDouble();
-                      h = random.nextInt(300).toDouble();
-                    });
-                  }, child: Icon(Icons.photo_size_select_large_sharp)),
+                          setState(() {
+                            color = Color.fromRGBO(random.nextInt(256),
+                                random.nextInt(256), random.nextInt(256), 1);
+                          });
+                        },
+                        child: Icon(Icons.color_lens)),
+                    ElevatedButton(
+                        onPressed: () {
+                          Random random = Random();
 
-                  ElevatedButton(onPressed: () {
-                    Random random = Random();
-
-                    setState(() {
-
-                    });
-                  }, child: Icon(Icons.color_lens))
-                ],)
+                          setState(() {
+                            color = Color.fromRGBO(random.nextInt(256),
+                                random.nextInt(256), random.nextInt(256), 1);
+                            w = random.nextInt(300).toDouble();
+                            h = random.nextInt(300).toDouble();
+                          });
+                        },
+                        child: Icon(Icons.all_inclusive))
+                  ],
+                )
               ],
             ),
           ),
