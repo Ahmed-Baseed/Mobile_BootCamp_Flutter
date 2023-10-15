@@ -8,7 +8,8 @@ class MoviesController {
       "category": "Sci-Fi",
       "rating": 9.9,
       "imagePath": "assets/images/movie/trend/1.jpg",
-      "type": "Movie"
+      "type": "Movie",
+      "season":['SEASON 1','SEASON 2','SEASON 3']
     },
     {
       "name": "One Piece",
@@ -71,6 +72,34 @@ class MoviesController {
       "category": "Action",
       "rating": 9.8,
       "imagePath": "assets/images/movie/trend/10.jpg",
+      "type": "Anime"
+    },
+    {
+      "name": "Peaky Blinders",
+      "category": "Action",
+      "rating": 9.8,
+      "imagePath": "assets/images/movie/trend/11.jpg",
+      "type": "Anime"
+    },
+    {
+      "name": "Friends",
+      "category": "Action",
+      "rating": 9.8,
+      "imagePath": "assets/images/movie/trend/12.jpg",
+      "type": "Anime"
+    },
+    {
+      "name": "Dark",
+      "category": "Action",
+      "rating": 9.8,
+      "imagePath": "assets/images/movie/trend/13.jpg",
+      "type": "Anime"
+    },
+    {
+      "name": "MR.Robot",
+      "category": "Action",
+      "rating": 9.8,
+      "imagePath": "assets/images/movie/trend/14.jpg",
       "type": "Anime"
     },
   ];

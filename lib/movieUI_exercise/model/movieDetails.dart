@@ -5,6 +5,7 @@ class MovieDetails {
   double? rating;
   String? imagePath;
   String? type;
+  List<String>? season;
 
   MovieDetails(
       {this.id,
@@ -12,7 +13,8 @@ class MovieDetails {
       this.category,
       this.rating,
       this.imagePath,
-      this.type});
+      this.type,
+      this.season});
 
   MovieDetails.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -21,6 +23,7 @@ class MovieDetails {
     rating = json['rating'];
     imagePath = json['imagePath'];
     type = json['type'];
+    season = json['season'];
   }
 
   Map<String, dynamic> toJson() {
@@ -31,6 +34,7 @@ class MovieDetails {
     data['rating'] = this.rating;
     data['imagePath'] = this.imagePath;
     data['type'] = this.type;
+    data['season'] = this.season;
     return data;
   }
 }
