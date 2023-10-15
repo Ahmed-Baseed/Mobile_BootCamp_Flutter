@@ -40,8 +40,8 @@ class _SearchBarAppState extends State<SearchBarApp> {
                   itemCount: lis.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                      title: Text("${lis[index].name}"),
-                      subtitle: Text("${lis[index].email}"),
+                      title: Text(lis[index].name),
+                      subtitle: Text(lis[index].email),
                     );
                   },
                 ),

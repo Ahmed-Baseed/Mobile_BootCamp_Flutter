@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mobile_bootcamp_flutter/day_30/exercise1/model.dart';
 import 'package:mobile_bootcamp_flutter/day_30/exercise1/tableInfo.dart';
 
 class TextFormExercise extends StatefulWidget {
@@ -14,22 +15,29 @@ class _TextFormExerciseState extends State<TextFormExercise> {
   TextEditingController mobile = TextEditingController();
   TextEditingController pass = TextEditingController();
   TextEditingController confirm = TextEditingController();
-  GlobalKey<FormState> frmKey = GlobalKey();
+  List<Data> data =[];
+  GlobalKey _frmkey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    Data? data;
     return Scaffold(
       appBar: AppBar(),
       body: Container(
         margin: EdgeInsets.all(15),
         child: SingleChildScrollView(
           child: Form(
+            key: _frmkey,
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextFormField(
                 controller: name,
+                autofocus: true,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
+                onSaved: (newValue){
+                    name.text = newValue!;
+                },
                 validator: (value) {
                   if (value.toString().length < 3)
                     return "Name cannot be less then 3";
@@ -45,6 +53,11 @@ class _TextFormExerciseState extends State<TextFormExercise> {
                 height: 20,
               ),
               TextFormField(
+
+                  onSaved: (newValue){
+                    mobile.text = newValue!;
+
+                },
                 controller: mobile,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 decoration: InputDecoration(
@@ -108,7 +121,9 @@ class _TextFormExerciseState extends State<TextFormExercise> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => TableInfo(),
+                          builder: (context) =>
+                              TableInfo(),
+
                         ));
                   })
             ],

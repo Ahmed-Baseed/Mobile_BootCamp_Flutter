@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_bootcamp_flutter/day_30/exercise1/model.dart';
 import 'package:mobile_bootcamp_flutter/day_30/exercise1/textFeildForm.dart';
 
 class TableInfo extends StatefulWidget {
-  const TableInfo({super.key});
 
   @override
   State<TableInfo> createState() => _TableInfoState();
 }
 
 class _TableInfoState extends State<TableInfo> {
+  Data? data;
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -22,17 +23,14 @@ class _TableInfoState extends State<TableInfo> {
               
              children: [
              TableRow(children: [
-               TableCell(child: Text("")),
-               TableCell(child: Text("")),
-               TableCell(child: Text("")),
+               TableCell(child: Text("${data!.name}")),
+               TableCell(child: Text("${data!.phone}")),
              ]),
              TableRow(children: [
                TableCell(child: Text("")),
                TableCell(child: Text("")),
-               TableCell(child: Text("")),
              ]),
              TableRow(children: [
-               TableCell(child: Text("")),
                TableCell(child: Text("")),
                TableCell(child: Text("")),
              ]),

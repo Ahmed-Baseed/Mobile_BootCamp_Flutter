@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_bootcamp_flutter/day_32/designUI.dart';
+// import 'package:mobile_bootcamp_flutter/animationFlutter/homeScreen.dart';
+// import 'package:mobile_bootcamp_flutter/day_31/exercise1/randomAnimation.dart';
+// import 'package:mobile_bootcamp_flutter/flutterPackages/packages.dart';
+// import 'package:mobile_bootcamp_flutter/flutterPackages/splashScreen.dart';
+import 'package:mobile_bootcamp_flutter/movieUI_exercise/homePage.dart';
+// import 'package:mobile_bootcamp_flutter/day_29/exercise1/searchTask.dart';
+// import 'package:mobile_bootcamp_flutter/day_30/exercise1/textFeildForm.dart';
+// import 'package:mobile_bootcamp_flutter/day_30/exercise2/dropDown.dart';
 
-import 'day_26/exercise1.dart';
-import 'day_26/exercise2.dart';
-import 'day_26/exercise3.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,9 +20,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: TodoApp(),
+      home: DesignUI(),
     );
   }
 }
