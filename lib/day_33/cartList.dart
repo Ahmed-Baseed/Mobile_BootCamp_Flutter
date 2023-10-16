@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_bootcamp_flutter/day_32/cartClass.dart';
+import 'package:mobile_bootcamp_flutter/day_33/cartClass.dart';
 
 class CartScreen extends StatefulWidget {
   final Cart cart;

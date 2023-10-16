@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mobile_bootcamp_flutter/movieUI_exercise/controller/moviesController.dart';
-import 'package:mobile_bootcamp_flutter/movieUI_exercise/model/movieDetails.dart';
-import 'package:mobile_bootcamp_flutter/movieUI_exercise/paymentPage.dart';
-import 'package:mobile_bootcamp_flutter/movieUI_exercise/videoShow.dart';
-import 'package:mobile_bootcamp_flutter/movieUI_exercise/watchList.dart';
+import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/controller/moviesController.dart';
+import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/model/movieDetails.dart';
+import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/paymentPage.dart';
+import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/videoShow.dart';
+import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/watchList.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mobile_bootcamp_flutter/movieUI_exercise/controller/moviesController.dart';
-import 'package:mobile_bootcamp_flutter/movieUI_exercise/model/movieDetails.dart';
+import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/controller/moviesController.dart';
+import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/model/movieDetails.dart';
 
 class WatchList extends StatefulWidget {
   const WatchList({super.key});

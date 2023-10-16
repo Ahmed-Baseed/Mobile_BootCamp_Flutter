@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mobile_bootcamp_flutter/movieUI_exercise/controller/moviesController.dart';
-import 'package:mobile_bootcamp_flutter/movieUI_exercise/model/movieDetails.dart';
+import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/controller/moviesController.dart';
+import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/model/movieDetails.dart';
+// import 'package:video_player/video_player.dart';
 
 class MovieShow extends StatefulWidget {
   const MovieShow({super.key});
@@ -11,9 +12,17 @@ class MovieShow extends StatefulWidget {
 }
 
 class _MovieShowState extends State<MovieShow> {
-  // FlickManager flickManager = FlickManager(
-  //   videoPlayerController: VideoPlayerController.asset("assets/images/video/movie.mp4"),
-  // );
+ 
+  // late VideoPlayerController _controller;
+
+  // void initState() {
+  //   super.initState();
+  //   _controller = VideoPlayerController.asset("assets/images/video/movie.mp4")
+  //     ..initialize().then((_) {
+  //       setState(() {});
+  //     });
+  // }
+
   MoviesController moviesController = MoviesController();
   @override
   Widget build(BuildContext context) {
@@ -26,15 +35,32 @@ class _MovieShowState extends State<MovieShow> {
         title: Text("${moviesController.movies[0].name}"),
         backgroundColor: Color.fromRGBO(33, 37, 41, 1),
       ),
-      // body:  AspectRatio(
-      //   aspectRatio: 16 / 9,
-      //   child: FlickVideoPlayer(flickManager: flickManager),
-      // ),
+     
       body: Container(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // _controller.value.isInitialized
+              //     ? AspectRatio(
+              //         aspectRatio: _controller.value.aspectRatio,
+              //         child: VideoPlayer(_controller),
+              //       )
+              //     : Container(),
+
+              // FloatingActionButton(
+              //   onPressed: () {
+              //     setState(() {
+              //       _controller.value.isPlaying
+              //           ? _controller.pause()
+              //           : _controller.play();
+              //     });
+              //   },
+              //   child: Icon(
+              //     _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+              //   ),
+              // ),
+
               //part 1
               Container(
                 decoration: BoxDecoration(
@@ -155,8 +181,8 @@ class _MovieShowState extends State<MovieShow> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 SizedBox(
-                                    width: 110,
-                                   ),
+                                  width: 110,
+                                ),
                                 SizedBox(
                                     width: 110,
                                     child: Row(
@@ -164,12 +190,12 @@ class _MovieShowState extends State<MovieShow> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                      "${moviesController.movies[0].name}",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 12),
-                                    ),
+                                          "${moviesController.movies[0].name}",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 12),
+                                        ),
                                         FaIcon(
                                           FontAwesomeIcons.heart,
                                           color: Colors.white,
@@ -177,11 +203,24 @@ class _MovieShowState extends State<MovieShow> {
                                         )
                                       ],
                                     )),
-                                    Row(children: [
-                                      Icon(Icons.watch_later_outlined,size: 15,color: Colors.amber,),
-                                      SizedBox(width: 5,),
-                                      Text("01:40:22",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w300),)
-                                    ],)
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.watch_later_outlined,
+                                      size: 15,
+                                      color: Colors.amber,
+                                    ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      "01:40:22",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w300),
+                                    )
+                                  ],
+                                )
                               ],
                             )
                           ],
