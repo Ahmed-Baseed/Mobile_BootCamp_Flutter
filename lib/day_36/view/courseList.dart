@@ -62,12 +62,16 @@ class _CourseListState extends State<CourseList> {
                   return ListTile(
                     title: Text("${CourseConroller.courses[index].name}"),
                     subtitle: Text("${CourseConroller.courses[index].hours}"),
-                    leading:
-                        IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+                    leading: IconButton(
+                        onPressed: () {
+                          CourseConroller.courses
+                              .removeAt(index);
+                        },
+                        icon: Icon(Icons.edit)),
                     trailing: IconButton(
                         onPressed: () {
-                          CourseConroller.courses.removeAt(index);
-                          setState(() {});
+                          CourseConroller.courses
+                              .remove(CourseConroller.courses[index]);
                         },
                         icon: Icon(Icons.delete)),
                   );
