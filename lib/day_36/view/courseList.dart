@@ -28,7 +28,6 @@ class _CourseListState extends State<CourseList> {
     );
   }
 
-  CourseConroller courseConroller = CourseConroller();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,8 +62,14 @@ class _CourseListState extends State<CourseList> {
                   return ListTile(
                     title: Text("${CourseConroller.courses[index].name}"),
                     subtitle: Text("${CourseConroller.courses[index].hours}"),
-                    trailing:
-                        IconButton(onPressed: () {CourseConroller.courses.remove(CourseConroller.courses[index]);}, icon: Icon(Icons.delete)),
+                    leading:
+                        IconButton(onPressed: () {}, icon: Icon(Icons.edit)),
+                    trailing: IconButton(
+                        onPressed: () {
+                          CourseConroller.courses.removeAt(index);
+                          setState(() {});
+                        },
+                        icon: Icon(Icons.delete)),
                   );
                 },
               ),

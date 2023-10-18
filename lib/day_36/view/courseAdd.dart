@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mobile_bootcamp_flutter/day_36/controller/courseController.dart';
-import 'package:mobile_bootcamp_flutter/day_36/view/courseList.dart';
+// import 'package:mobile_bootcamp_flutter/day_36/view/courseList.dart';
 
 class CourseAdd extends StatefulWidget {
   const CourseAdd({super.key});
@@ -51,7 +51,7 @@ class _CourseAddState extends State<CourseAdd> {
                   String name = nameController.text;
                   double hours = int.parse(hourController.text).toDouble();
                   courseConroller.addCourse(name, hours);
-                  Navigator.pop(context,true);
+                  Navigator.pop(context, true);
                 },
                 child: Text("Save")),
           ],
