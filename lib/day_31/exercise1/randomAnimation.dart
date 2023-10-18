@@ -42,8 +42,10 @@ class _RandomAnimationState extends State<RandomAnimation> {
                           Random random = Random();
 
                           setState(() {
-                            color = Color.fromRGBO(random.nextInt(256),
-                                random.nextInt(256), random.nextInt(256), 1);
+                            color = Color.fromRGBO(
+                              random.nextInt(256),
+                                random.nextInt(256), 
+                                random.nextInt(256), 1);
                           });
                         },
                         child: Icon(Icons.color_lens)),

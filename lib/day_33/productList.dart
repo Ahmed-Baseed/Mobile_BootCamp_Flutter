@@ -57,12 +57,18 @@ class _MainScreenState extends State<MainScreen> {
             itemBuilder: (context) => [
               PopupMenuItem(
                 child: Text('View Cart'),
-                onTap: () {
-                  Navigator.push(
+                onTap: () async {
+                bool result = await Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => CartScreen(cart: cart)),
                   );
+                  if(result)
+                  {
+                    setState(() {
+                      
+                    });
+                  }
                 },
               ),
               PopupMenuItem(

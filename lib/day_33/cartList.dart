@@ -27,64 +27,73 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black),
-        elevation: 0,
-      ),
-      body: ListView.builder(
-        itemCount: widget.cart.items.length,
-        itemBuilder: (context, index) {
-          final product = widget.cart.items[index];
-          return ListTile(
-            title: Text(product.name),
-            subtitle: Text('\$${product.price.toStringAsFixed(2)}'),
-            trailing: InkWell(
-                child: Icon(
-                  Icons.remove_circle,
-                  color: Colors.red,
+    
+    return WillPopScope(
+
+      onWillPop: () async{
+        Navigator.pop(context,true);
+
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.black),
+          elevation: 0,
+        ),
+        body: ListView.builder(
+          itemCount: widget.cart.items.length,
+          itemBuilder: (context, index) {
+            final product = widget.cart.items[index];
+            return ListTile(
+              title: Text(product.name),
+              subtitle: Text('\$${product.price.toStringAsFixed(2)}'),
+              trailing: InkWell(
+                  child: Icon(
+                    Icons.remove_circle,
+                    color: Colors.red,
+                  ),
+                  onTap: () {
+                    widget.cart.removeFromCart(product);
+                    setState(() {});
+                  }),
+            );
+          },
+        ),
+        bottomNavigationBar: Container(
+          padding: EdgeInsets.all(16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                'Total Amount: \$${calculateTotalAmount().toStringAsFixed(2)}',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 16),
+              ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(Colors.white)),
+                onPressed: () {
+                  clearCart();
+                },
+                child: Text(
+                  'Clear Cart',
+                  style: TextStyle(color: Colors.black),
                 ),
-                onTap: () {
-                  widget.cart.removeFromCart(product);
-                  setState(() {});
-                }),
-          );
-        },
-      ),
-      bottomNavigationBar: Container(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              'Total Amount: \$${calculateTotalAmount().toStringAsFixed(2)}',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 16),
-            ElevatedButton(
-              style: ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(Colors.white)),
-              onPressed: () {
-                clearCart();
-              },
-              child: Text(
-                'Clear Cart',
-                style: TextStyle(color: Colors.black),
               ),
-            ),
-            SizedBox(height: 8),
-            ElevatedButton(
-              style: ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(Colors.white)),
-              onPressed: () {},
-              child: Text(
-                'Confirm',
-                style: TextStyle(color: Colors.black),
+              SizedBox(height: 8),
+              ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(Colors.white)),
+                onPressed: () {},
+                child: Text(
+                  'Confirm',
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

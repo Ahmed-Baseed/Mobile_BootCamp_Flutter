@@ -69,8 +69,31 @@ class _PizzaOrderState extends State<PizzaOrder> {
             });
           },
         ),
+        if (selectedToppings.isNotEmpty)
+          Column(
+            children: [
+              SizedBox(height: 10),
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: selectedToppings.length,
+                itemBuilder: (context, index) {
+                  final topping = selectedToppings[index];
+                  return ListTile(
+                    title: Text(topping),
+                    leading: IconButton(
+                      icon: Icon(Icons.remove_circle_outline),
+                      onPressed: () {
+                        setState(() {
+                          selectedToppings.removeAt(index);
+                        });
+                      },
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         SizedBox(height: 20, child: Divider(thickness: 2)),
-        SizedBox(height: 20),
         CheckboxListTile(
           title: Text('Gluten-free'),
           value: isGlutenFree,
@@ -91,9 +114,7 @@ class _PizzaOrderState extends State<PizzaOrder> {
         ),
         if (specialInstructions)
           Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20)
-            ),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
             child: TextField(
               maxLength: 100,
             ),
@@ -138,30 +159,6 @@ class _PizzaOrderState extends State<PizzaOrder> {
             ),
             SizedBox(height: 20),
             dropdownButton(),
-            if (selectedToppings.isNotEmpty)
-              Column(
-                children: [
-                  SizedBox(height: 10),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: selectedToppings.length,
-                    itemBuilder: (context, index) {
-                      final topping = selectedToppings[index];
-                      return ListTile(
-                        title: Text(topping),
-                        leading: IconButton(
-                          icon: Icon(Icons.remove_circle_outline),
-                          onPressed: () {
-                            setState(() {
-                              selectedToppings.removeAt(index);
-                            });
-                          },
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
             ElevatedButton(
               onPressed: selectedSize != null ? () {} : null,
               child: Row(
