@@ -1,4 +1,4 @@
-import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/model/movieDetails.dart';
+import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/features/model/movieDetails.dart';
 
 class MoviesController {
   List<MovieDetails> _allMovie = [];

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/controller/moviesController.dart';
-import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/model/movieDetails.dart';
-import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/paymentPage.dart';
-import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/videoShow.dart';
-import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/watchList.dart';
+import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/core/components/homePageComponenets.dart';
+import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/features/controller/moviesController.dart';
+import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/features/model/movieDetails.dart';
+import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/features/view/paymentPage.dart';
+import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/features/view/videoShow.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -151,8 +151,7 @@ class _HomePageState extends State<HomePage> {
                     )),
                 TextButton(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => WatchList()));
+                      Navigator.pushNamed(context, "/watchList", arguments: mc);
                     },
                     child: Text(
                       "FOR YOU",
@@ -288,89 +287,14 @@ class _HomePageState extends State<HomePage> {
                       scrollDirection: Axis.horizontal,
                       itemCount: 5,
                       itemBuilder: (context, index) {
-                        return Column(
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                mc.add(moviesController.movies[index]);
-                                
-                              },
-                              child: Container(
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                            "${moviesController.movies[index].imagePath}"),
-                                        fit: BoxFit.cover),
-                                  ),
-                                  padding: EdgeInsets.all(5),
-                                  margin: EdgeInsets.all(5),
-                                  height: 150,
-                                  width: 110,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.hd,
-                                              color: Colors.amber[600],
-                                            ),
-                                            SizedBox(
-                                              width: 40,
-                                            ),
-                                            Icon(
-                                              Icons.star,
-                                              size: 12,
-                                              color: Colors.amber[700],
-                                            ),
-                                            Text(
-                                              "${moviesController.movies[index].rating.toString()}",
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.white),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  )),
-                            ),
-                            Column(
-                              children: [
-                                SizedBox(
-                                    width: 110,
-                                    child: Text(
-                                      "${moviesController.movies[index].name}",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 12),
-                                    )),
-                                SizedBox(
-                                    width: 110,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "${moviesController.movies[index].category}",
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              color: Colors.amber),
-                                        ),
-                                        FaIcon(
-                                          FontAwesomeIcons.heart,
-                                          color: Colors.white,
-                                          size: 15,
-                                        )
-                                      ],
-                                    )),
-                              ],
-                            )
-                          ],
+                        return HomePageWidget(
+                          imagePath: moviesController.movies[index].imagePath,
+                          category: moviesController.movies[index].category,
+                          name: moviesController.movies[index].name,
+                          rating: moviesController.movies[index].rating,
+                          onTap: () {
+                            mc.add(moviesController.movies[index]);
+                          },
                         );
                       }),
                 ),
@@ -406,85 +330,14 @@ class _HomePageState extends State<HomePage> {
                       scrollDirection: Axis.horizontal,
                       itemCount: 5,
                       itemBuilder: (context, index) {
-                        return Column(
-                          children: [
-                            Container(
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          "${moviesController.movies[index + 5].imagePath}"),
-                                      fit: BoxFit.cover),
-                                ),
-                                padding: EdgeInsets.all(10),
-                                margin: EdgeInsets.all(5),
-                                height: 150,
-                                width: 110,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Icons.hd,
-                                            color: Colors.amber[600],
-                                          ),
-                                          SizedBox(
-                                            width: 30,
-                                          ),
-                                          Icon(
-                                            Icons.star,
-                                            size: 12,
-                                            color: Colors.amber[700],
-                                          ),
-                                          Text(
-                                            "${moviesController.movies[index + 5].rating.toString()}",
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white),
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                )),
-                            Column(
-                              children: [
-                                SizedBox(
-                                    width: 110,
-                                    child: Wrap(
-                                      children: [
-                                        Text(
-                                          "${moviesController.movies[index + 5].name}",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    )),
-                                SizedBox(
-                                    width: 110,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "${moviesController.movies[index + 5].category}",
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              color: Colors.amber),
-                                        ),
-                                        FaIcon(
-                                          FontAwesomeIcons.heart,
-                                          color: Colors.white,
-                                          size: 15,
-                                        )
-                                      ],
-                                    )),
-                              ],
-                            )
-                          ],
+                        return HomePageWidget(
+                          imagePath: moviesController.movies[index+5].imagePath,
+                          category: moviesController.movies[index+5].category,
+                          name: moviesController.movies[index+5].name,
+                          rating: moviesController.movies[index+5].rating,
+                          onTap: () {
+                            mc.add(moviesController.movies[index+5]);
+                          },
                         );
                       }),
                 ),
