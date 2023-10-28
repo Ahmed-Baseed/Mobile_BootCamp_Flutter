@@ -4,6 +4,7 @@ import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/core/components/
 import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/features/controller/moviesController.dart';
 import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/features/model/movieDetails.dart';
 import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/features/view/paymentPage.dart';
+import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/features/view/subscribePage.dart';
 import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/features/view/videoShow.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,107 +18,82 @@ class _HomePageState extends State<HomePage> {
   List<Icon> contentType = [
     Icon(
       Icons.movie,
-      color: Colors.amber[500],
+      color: Colors.amber,
     ),
     Icon(
       Icons.all_out,
-      color: Colors.amber[500],
+      color: Colors.amber,
     ),
     Icon(
       Icons.play_circle_filled_rounded,
-      color: Colors.amber[500],
+      color: Colors.amber,
     ),
     Icon(
       Icons.bedroom_baby_rounded,
-      color: Colors.amber[500],
+      color: Colors.amber,
     ),
     Icon(
       Icons.tv_rounded,
-      color: Colors.amber[500],
+      color: Colors.amber,
     ),
   ];
+
   MoviesController moviesController = MoviesController();
   @override
   Widget build(BuildContext context) {
+    List<Map<String, dynamic>> list = [
+      {'name': 'My Account', 'icon': Icons.person},
+      {'name': 'About Us', 'icon': Icons.group},
+      {'name': 'My Subscriptions', 'icon': Icons.subscriptions_rounded},
+      {'name': 'Support', 'icon': Icons.support},
+      {'name': 'Rate Us', 'icon': Icons.thumb_up_rounded},
+      {'name': 'Sign Out', 'icon': Icons.logout_outlined},
+    ];
     late List<MovieDetails> mc = [];
     moviesController.getAllmovie();
     return Scaffold(
       drawer: Drawer(
           backgroundColor: Color.fromRGBO(48, 49, 51, 1),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          child: Container(
+            padding: EdgeInsets.only(top: 100),
+            child: Container(
+              padding: EdgeInsets.all(15),
+              child: Column(
                 children: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage("assets/images/profile.jpg"),
-                    maxRadius: 30,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text(
-                        "Ahmed Mohammed",
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
+                      CircleAvatar(
+                        backgroundImage:
+                            AssetImage("assets/images/profile.jpg"),
+                        maxRadius: 30,
                       ),
-                      Text("ahmedTestEmail@gmail.com",
-                          style: TextStyle(color: Colors.white))
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Ahmed Mohammed",
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                          Text("ahmedTestEmail@gmail.com",
+                              style: TextStyle(color: Colors.white))
+                        ],
+                      )
                     ],
-                  )
+                  ),
+                  for (int a = 0; a < 6; a++)
+                    ListTile(
+                      leading: Icon(list[a]['icon'], color: Colors.amber),
+                      title: Text("${list[a]['name']}",
+                          style: TextStyle(color: Colors.white, fontSize: 15)),
+                      onTap: () {},
+                    ),
                 ],
               ),
-              ListTile(
-                leading: Icon(Icons.person, color: Colors.white),
-                title:
-                    Text("My Account", style: TextStyle(color: Colors.white)),
-                onTap: () {},
-              ),
-              ListTile(
-                leading: Icon(Icons.group, color: Colors.white),
-                title: Text("About Us", style: TextStyle(color: Colors.white)),
-                onTap: () {},
-              ),
-              ListTile(
-                leading: Icon(Icons.subscriptions_rounded, color: Colors.white),
-                title: Text("My Subscriptions",
-                    style: TextStyle(color: Colors.white)),
-                onTap: () {},
-              ),
-              ListTile(
-                leading:
-                    Icon(Icons.account_balance_wallet, color: Colors.white),
-                title: Text("Payment Method",
-                    style: TextStyle(color: Colors.white)),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => PaymentPage(),
-                      ));
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.support_rounded, color: Colors.white),
-                title: Text("Support", style: TextStyle(color: Colors.white)),
-                onTap: () {},
-              ),
-              ListTile(
-                leading:
-                    Icon(Icons.thumbs_up_down_rounded, color: Colors.white),
-                title: Text("Rate Us", style: TextStyle(color: Colors.white)),
-                onTap: () {},
-              ),
-              ListTile(
-                leading: Icon(Icons.logout_rounded, color: Colors.white),
-                title: Text("Logout", style: TextStyle(color: Colors.white)),
-                onTap: () {},
-              ),
-            ],
+            ),
           )),
       backgroundColor: Color.fromRGBO(48, 49, 51, 1),
       appBar: AppBar(
@@ -138,7 +114,58 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      showDialog(
+                        barrierColor: Colors.white.withOpacity(0.3),
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            backgroundColor: Colors.amber,
+                            icon: Icon(
+                              Icons.movie_filter_outlined,
+                              size: 60,
+                            ),
+                            content: Container(
+                                padding: EdgeInsets.only(left: 20, right: 20),
+                                child: SizedBox(
+                                  height: 130,
+                                  width: 0,
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        'Subscribe Now to access premium content',
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      SizedBox(
+                                        height: 30,
+                                      ),
+                                      ElevatedButton(
+                                          style: ButtonStyle(
+                                              padding: MaterialStatePropertyAll(
+                                                  EdgeInsets.all(15)),
+                                              backgroundColor:
+                                                  MaterialStatePropertyAll(
+                                                      Colors.grey[700])),
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      SubscriptionPlan(),
+                                                ));
+                                          },
+                                          child: Text(
+                                            "SUBSCRIBE NOW",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                    ],
+                                  ),
+                                )),
+                          );
+                        },
+                      );
+                    },
                     child: Text(
                       "TRENDING",
                       style: TextStyle(fontSize: 12, color: Colors.white),
@@ -331,12 +358,13 @@ class _HomePageState extends State<HomePage> {
                       itemCount: 5,
                       itemBuilder: (context, index) {
                         return HomePageWidget(
-                          imagePath: moviesController.movies[index+5].imagePath,
-                          category: moviesController.movies[index+5].category,
-                          name: moviesController.movies[index+5].name,
-                          rating: moviesController.movies[index+5].rating,
+                          imagePath:
+                              moviesController.movies[index + 5].imagePath,
+                          category: moviesController.movies[index + 5].category,
+                          name: moviesController.movies[index + 5].name,
+                          rating: moviesController.movies[index + 5].rating,
                           onTap: () {
-                            mc.add(moviesController.movies[index+5]);
+                            mc.add(moviesController.movies[index + 5]);
                           },
                         );
                       }),

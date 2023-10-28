@@ -10,7 +10,25 @@ class IntroPage extends StatefulWidget {
   State<IntroPage> createState() => _IntroPageState();
 }
 
+
 class _IntroPageState extends State<IntroPage> {
+  List<Map<String, dynamic>> mapList = [
+  {
+    'icon': Icons.tv,
+    'title': 'WATCH ON ANY DEVICE',
+    'description': 'Connect to using your favorite devices.',
+  },
+  {
+    'icon': Icons.play_circle_fill,
+    'title': 'UNLIMITED ENTERTAINMENT',
+    'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  },
+  {
+    'icon': Icons.cut_rounded,
+    'title': 'NO ANNOYING CONTRACTS',
+    'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  },
+];
   PageController controller = PageController();
 
   @override
@@ -45,21 +63,21 @@ class _IntroPageState extends State<IntroPage> {
                       itemBuilder: (context, index) {
                         return Container(
                           padding:
-                              EdgeInsets.only(left: 30, bottom: 250, right: 30),
+                              EdgeInsets.only(left: 30, bottom: 250, right: 20),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Icon(
-                                HeroIcons.tv,
-                                color: Colors.amber[700],
+                                mapList[index]['icon'],
+                                color: Colors.amber,
                                 size: 100,
                               ),
                               SizedBox(
                                 height: 10,
                               ),
                               Text(
-                                "WATCH ON ANY DEVICE",
+                                "${mapList[index]['title']}",
                                 style: TextStyle(
                                     fontSize: 25,
                                     color: Colors.white,
@@ -69,7 +87,7 @@ class _IntroPageState extends State<IntroPage> {
                                 height: 10,
                               ),
                               Text(
-                                "Connect to using your favorite devices",
+                                "${mapList[index]['description']}",
                                 style: TextStyle(
                                   fontSize: 20,
                                   color: Colors.grey,

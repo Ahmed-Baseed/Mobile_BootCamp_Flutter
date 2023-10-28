@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/features/view/createAccount.dart';
+import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/features/view/signinPage.dart';
 
 class Account extends StatelessWidget {
   const Account({super.key});
@@ -15,8 +17,8 @@ class Account extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(
-              HeroIcons.tv,
-              color: Colors.amber[700],
+              BoxIcons.bxs_movie_play,
+              color: Colors.amber,
               size: 100,
             ),
             SizedBox(
@@ -50,8 +52,10 @@ class Account extends StatelessWidget {
               child: ElevatedButton(
                   style: ButtonStyle(
                       backgroundColor:
-                          MaterialStatePropertyAll(Colors.amber[700])),
-                  onPressed: () {},
+                          MaterialStatePropertyAll(Colors.amber)),
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => CreateAccount(),));
+                  },
                   child: Text(
                     "CREATE AN ACCOUNT",
                     style: TextStyle(color: Colors.black),
@@ -64,7 +68,7 @@ class Account extends StatelessWidget {
               child: ElevatedButton(
                   style: ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(Colors.white)),
-                  onPressed: () {},
+                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => SigninPage(),));},
                   child: Text(
                     "SIGN IN",
                     style: TextStyle(color: Colors.black),

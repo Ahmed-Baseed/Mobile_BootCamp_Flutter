@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/features/view/screen15.dart';
 
 class PaymentPage extends StatefulWidget {
   const PaymentPage({super.key});
@@ -144,7 +145,13 @@ class _PaymentPageState extends State<PaymentPage> {
                 height: 100,
               ),
               ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CategoryPage(),
+                        ));
+                  },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.grey[800],
                       fixedSize: Size(400, 60)),

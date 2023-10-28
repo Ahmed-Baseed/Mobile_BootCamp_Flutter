@@ -1,8 +1,9 @@
+import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/core/components/homePageComponenets.dart';
 import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/features/controller/moviesController.dart';
 import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/features/model/movieDetails.dart';
-// import 'package:video_player/video_player.dart';
+import 'package:video_player/video_player.dart';
 
 class MovieShow extends StatefulWidget {
   const MovieShow({super.key});
@@ -12,6 +13,12 @@ class MovieShow extends StatefulWidget {
 }
 
 class _MovieShowState extends State<MovieShow> {
+  final FlickManager flickManager = FlickManager(
+    videoPlayerController: VideoPlayerController.asset(
+      'assets/images/video/movie.mp4',
+    ),
+  );
+
   MoviesController moviesController = MoviesController();
   @override
   Widget build(BuildContext context) {
@@ -30,27 +37,44 @@ class _MovieShowState extends State<MovieShow> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //part 1
-              Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("assets/images/pxfuel.jpg"),
-                    fit: BoxFit.cover,
-                    opacity: 1,
-                  ),
-                ),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 250,
-                      ),
-                    ]),
+              AspectRatio(
+                aspectRatio: 16 / 9,
+                child: FlickVideoPlayer(flickManager: flickManager),
               ),
-
-              Divider(thickness: 8, color: Color.fromRGBO(33, 37, 41, 1)),
+              ListTile(
+                title: Text(
+                  "Better Call Soul",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+                subtitle: Row(
+                  children: [
+                    Icon(
+                      Icons.hd,
+                      color: Colors.amber,
+                    ),
+                    Padding(padding: EdgeInsets.only(right: 5)),
+                    Text(
+                      "Action Movie",
+                      style: TextStyle(color: Colors.white, fontSize: 10),
+                    ),
+                    Spacer(),
+                    Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                      size: 10,
+                    ),
+                    Text(
+                      " ${moviesController.movies[1].rating}",
+                      style: TextStyle(color: Colors.white),
+                    )
+                  ],
+                ),
+              ),
+              Divider(thickness: 1, color: Colors.black,endIndent: 15,indent: 15),
               //part 2
               Container(
-                margin: EdgeInsets.only(left: 20),
+                margin: EdgeInsets.only(left: 20,top: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

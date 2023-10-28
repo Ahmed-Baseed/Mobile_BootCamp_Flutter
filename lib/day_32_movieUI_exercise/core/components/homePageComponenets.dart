@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+// ignore: must_be_immutable
 class HomePageWidget extends StatelessWidget {
   String? imagePath, name, category;
   double? rating;
@@ -38,7 +39,7 @@ class HomePageWidget extends StatelessWidget {
                       children: [
                         Icon(
                           Icons.hd,
-                          color: Colors.amber[600],
+                          color: Colors.amber,
                         ),
                         SizedBox(
                           width: 40,
@@ -46,7 +47,7 @@ class HomePageWidget extends StatelessWidget {
                         Icon(
                           Icons.star,
                           size: 12,
-                          color: Colors.amber[700],
+                          color: Colors.amber,
                         ),
                         Text(
                           "${rating.toString()}",

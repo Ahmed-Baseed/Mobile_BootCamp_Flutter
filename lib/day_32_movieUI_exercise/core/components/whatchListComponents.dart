@@ -41,7 +41,7 @@ class MyWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(Icons.play_arrow_rounded,
-                          size: 45, color: Colors.amber[600])
+                          size: 45, color: Colors.amber)
                     ],
                   ),
                 ),
@@ -54,7 +54,7 @@ class MyWidget extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.hd,
-                      color: Colors.amber[600],
+                      color: Colors.amber,
                     ),
                     Text(
                       "${name}",

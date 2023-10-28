@@ -1,7 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/core/components/whatchListComponents.dart';
 import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/features/model/movieDetails.dart';
+import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/features/view/homePage.dart';
+import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/features/view/notificationPage.dart';
 
 // ignore: must_be_immutable
 class WatchList extends StatefulWidget {
@@ -13,6 +14,20 @@ class WatchList extends StatefulWidget {
 }
 
 class _WatchListState extends State<WatchList> {
+  int currentIndex = 0;
+
+  List<Widget> screens = [
+    WatchList(mc: []),
+    HomePage(),
+    NotificationPage(),
+  ];
+
+  void onTabTapped(int index) {
+    setState(() {
+      currentIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return widget.mc.isEmpty
@@ -50,7 +65,7 @@ class _WatchListState extends State<WatchList> {
               ],
             )),
             bottomNavigationBar: BottomNavigationBar(
-              backgroundColor: Color.fromRGBO(33, 37, 41, 1),
+              backgroundColor: Color(0xff202123),
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
                     icon: Icon(
@@ -97,6 +112,8 @@ class _WatchListState extends State<WatchList> {
                   );
                 }),
             bottomNavigationBar: BottomNavigationBar(
+              currentIndex: currentIndex,
+              onTap: onTabTapped,
               backgroundColor: Color.fromRGBO(33, 37, 41, 1),
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
@@ -112,9 +129,18 @@ class _WatchListState extends State<WatchList> {
                     ),
                     label: ""),
                 BottomNavigationBarItem(
-                    icon: Icon(
-                      Icons.notifications_active,
-                      color: Colors.white,
+                    icon: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => NotificationPage(),
+                            ));
+                      },
+                      child: Icon(
+                        Icons.notifications_active,
+                        color: Colors.white,
+                      ),
                     ),
                     label: ""),
               ],
