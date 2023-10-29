@@ -22,12 +22,6 @@ class _WatchListState extends State<WatchList> {
     NotificationPage(),
   ];
 
-  void onTabTapped(int index) {
-    setState(() {
-      currentIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return widget.mc.isEmpty
@@ -65,6 +59,17 @@ class _WatchListState extends State<WatchList> {
               ],
             )),
             bottomNavigationBar: BottomNavigationBar(
+               onTap: (val) {
+                currentIndex = val;
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => screens[currentIndex],
+                    ));
+                    setState(() {
+                      
+                    });
+              },
               backgroundColor: Color(0xff202123),
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
@@ -112,9 +117,18 @@ class _WatchListState extends State<WatchList> {
                   );
                 }),
             bottomNavigationBar: BottomNavigationBar(
-              currentIndex: currentIndex,
-              onTap: onTabTapped,
-              backgroundColor: Color.fromRGBO(33, 37, 41, 1),
+             onTap: (val) {
+                currentIndex = val;
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => screens[currentIndex],
+                    ));
+                    setState(() {
+                      
+                    });
+              },
+              backgroundColor: Color(0xff202123),
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
                     icon: Icon(
@@ -129,18 +143,9 @@ class _WatchListState extends State<WatchList> {
                     ),
                     label: ""),
                 BottomNavigationBarItem(
-                    icon: InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => NotificationPage(),
-                            ));
-                      },
-                      child: Icon(
-                        Icons.notifications_active,
-                        color: Colors.white,
-                      ),
+                    icon: Icon(
+                      Icons.notifications_active,
+                      color: Colors.white,
                     ),
                     label: ""),
               ],
