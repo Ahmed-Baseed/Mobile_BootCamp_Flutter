@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_bootcamp_flutter/api_lecture/dio.dart';
-import 'package:mobile_bootcamp_flutter/day_44/viewData.dart';
+// import 'package:mobile_bootcamp_flutter/api_lecture/dio.dart';
+// import 'package:mobile_bootcamp_flutter/day_44/viewData.dart';
+// import 'package:mobile_bootcamp_flutter/day_45/view/todoView.dart';
+import 'package:mobile_bootcamp_flutter/day_48/view/deptScreen.dart';
 // import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/routeManage/routeManage.dart';
 // import 'package:mobile_bootcamp_flutter/day_42/views/post_view.dart';
 // import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/view/homePage.dart';
@@ -28,7 +30,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: DataView(),
+      home: Dept_screen(),
       // initialRoute: '/',
       // onGenerateRoute: RouteManager.generateRoute,
     );
