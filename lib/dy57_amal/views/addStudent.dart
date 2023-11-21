@@ -114,6 +114,8 @@ class _Add_studentState extends State<Add_student> {
                               MaterialPageRoute(
                                 builder: (context) => ShowStudent(),
                               ));
+                              studentName.clear();
+                              phoneNum.clear();
                           setState(() {});
                         },
                         child: Text("Add")),

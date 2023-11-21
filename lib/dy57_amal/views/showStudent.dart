@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/features/view/signinPage.dart';
 import 'package:mobile_bootcamp_flutter/dy57_amal/db_helper.dart';
+import 'package:mobile_bootcamp_flutter/dy57_amal/entites/student.dart';
 import 'package:mobile_bootcamp_flutter/dy57_amal/views/addStudent.dart';
 
 class ShowStudent extends StatefulWidget {
@@ -11,6 +12,7 @@ class ShowStudent extends StatefulWidget {
 }
 
 class _ShowStudentState extends State<ShowStudent> {
+  Student s = Student();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,8 +69,13 @@ class _ShowStudentState extends State<ShowStudent> {
                                       child: Row(
                                         children: [
                                           IconButton(
-                                            onPressed: () {},
-                                            icon: Icon(Icons.edit),
+                                            onPressed: () {
+                                              DBHelper.database.studentDao.updateStudent(s);
+                                            },
+                                            icon: Icon(
+                                              Icons.edit,
+                                              color: Color(0xff3c6e71),
+                                            ),
                                           ),
                                           IconButton(
                                             onPressed: () {
@@ -77,7 +84,10 @@ class _ShowStudentState extends State<ShowStudent> {
                                                       .data![index].id!);
                                               setState(() {});
                                             },
-                                            icon: Icon(Icons.delete),
+                                            icon: Icon(
+                                              Icons.delete,
+                                              color: Color(0xff3c6e71),
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -105,15 +115,15 @@ class _ShowStudentState extends State<ShowStudent> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Color(0xff3c6e71),
-        child: Icon(Icons.add),
-        onPressed: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => Add_student(),
-            ));
-      }),
+          backgroundColor: Color(0xff3c6e71),
+          child: Icon(Icons.add),
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Add_student(),
+                ));
+          }),
     );
   }
 }

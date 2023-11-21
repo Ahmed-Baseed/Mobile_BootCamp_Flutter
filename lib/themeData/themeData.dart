@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:mobile_bootcamp_flutter/themeData/secondPage.dart';
 import 'package:mobile_bootcamp_flutter/themeData/theme/app_theme.dart';
 import 'package:mobile_bootcamp_flutter/themeData/theme/theme_class.dart';
 
@@ -77,7 +78,9 @@ class _ThemedataState extends State<Themedata> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => SecondPage(),));
+        },
         child: isMode
             ? Icon(
                 HeroIcons.moon,

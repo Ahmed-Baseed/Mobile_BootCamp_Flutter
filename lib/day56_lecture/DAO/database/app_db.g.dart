@@ -1,27 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'app_database.dart';
+part of 'app_db.dart';
 
 // **************************************************************************
 // FloorGenerator
 // **************************************************************************
 
 // ignore: avoid_classes_with_only_static_members
-class $FloorAppDatabase {
+class $FloorApp_db {
   /// Creates a database builder for a persistent database.
   /// Once a database is built, you should keep a reference to it and re-use it.
-  static _$AppDatabaseBuilder databaseBuilder(String name) =>
-      _$AppDatabaseBuilder(name);
+  static _$App_dbBuilder databaseBuilder(String name) => _$App_dbBuilder(name);
 
   /// Creates a database builder for an in memory database.
   /// Information stored in an in memory database disappears when the process is killed.
   /// Once a database is built, you should keep a reference to it and re-use it.
-  static _$AppDatabaseBuilder inMemoryDatabaseBuilder() =>
-      _$AppDatabaseBuilder(null);
+  static _$App_dbBuilder inMemoryDatabaseBuilder() => _$App_dbBuilder(null);
 }
 
-class _$AppDatabaseBuilder {
-  _$AppDatabaseBuilder(this.name);
+class _$App_dbBuilder {
+  _$App_dbBuilder(this.name);
 
   final String? name;
 
@@ -30,23 +28,23 @@ class _$AppDatabaseBuilder {
   Callback? _callback;
 
   /// Adds migrations to the builder.
-  _$AppDatabaseBuilder addMigrations(List<Migration> migrations) {
+  _$App_dbBuilder addMigrations(List<Migration> migrations) {
     _migrations.addAll(migrations);
     return this;
   }
 
   /// Adds a database [Callback] to the builder.
-  _$AppDatabaseBuilder addCallback(Callback callback) {
+  _$App_dbBuilder addCallback(Callback callback) {
     _callback = callback;
     return this;
   }
 
   /// Creates the database and initializes it.
-  Future<AppDatabase> build() async {
+  Future<App_db> build() async {
     final path = name != null
         ? await sqfliteDatabaseFactory.getDatabasePath(name!)
         : ':memory:';
-    final database = _$AppDatabase();
+    final database = _$App_db();
     database.database = await database.open(
       path,
       _migrations,
@@ -56,14 +54,14 @@ class _$AppDatabaseBuilder {
   }
 }
 
-class _$AppDatabase extends AppDatabase {
-  _$AppDatabase([StreamController<String>? listener]) {
+class _$App_db extends App_db {
+  _$App_db([StreamController<String>? listener]) {
     changeListener = listener ?? StreamController<String>.broadcast();
   }
 
-  StudentDao? _studentDaoInstance;
+  StudentDAO? _studentDAOInstance;
 
-  DepartmentDao? _departmentDaoInstance;
+  DepartmentDAO? _departmentDAOInstance;
 
   Future<sqflite.Database> open(
     String path,
@@ -87,7 +85,7 @@ class _$AppDatabase extends AppDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `StudentX` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `full_name` TEXT, `phone_no` TEXT, `email` TEXT, `active` INTEGER, `departmentId` INTEGER, FOREIGN KEY (`departmentId`) REFERENCES `Department` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION)');
+            'CREATE TABLE IF NOT EXISTS `StudentX` (`id` INTEGER, `full_name` TEXT NOT NULL, `phone_no` TEXT, `email` TEXT, `active` INTEGER, `deptID` INTEGER, FOREIGN KEY (`deptID`) REFERENCES `Department` (`id`) ON UPDATE NO ACTION ON DELETE NO ACTION, PRIMARY KEY (`id`))');
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `Department` (`id` INTEGER, `name` TEXT, PRIMARY KEY (`id`))');
         await database.execute(
@@ -100,18 +98,18 @@ class _$AppDatabase extends AppDatabase {
   }
 
   @override
-  StudentDao get studentDao {
-    return _studentDaoInstance ??= _$StudentDao(database, changeListener);
+  StudentDAO get studentDAO {
+    return _studentDAOInstance ??= _$StudentDAO(database, changeListener);
   }
 
   @override
-  DepartmentDao get departmentDao {
-    return _departmentDaoInstance ??= _$DepartmentDao(database, changeListener);
+  DepartmentDAO get departmentDAO {
+    return _departmentDAOInstance ??= _$DepartmentDAO(database, changeListener);
   }
 }
 
-class _$StudentDao extends StudentDao {
-  _$StudentDao(
+class _$StudentDAO extends StudentDAO {
+  _$StudentDAO(
     this.database,
     this.changeListener,
   )   : _queryAdapter = QueryAdapter(database),
@@ -124,7 +122,7 @@ class _$StudentDao extends StudentDao {
                   'phone_no': item.phoneNo,
                   'email': item.email,
                   'active': item.active == null ? null : (item.active! ? 1 : 0),
-                  'departmentId': item.departmentId
+                  'deptID': item.deptID
                 }),
         _studentUpdateAdapter = UpdateAdapter(
             database,
@@ -136,7 +134,7 @@ class _$StudentDao extends StudentDao {
                   'phone_no': item.phoneNo,
                   'email': item.email,
                   'active': item.active == null ? null : (item.active! ? 1 : 0),
-                  'departmentId': item.departmentId
+                  'deptID': item.deptID
                 }),
         _studentDeletionAdapter = DeletionAdapter(
             database,
@@ -148,7 +146,7 @@ class _$StudentDao extends StudentDao {
                   'phone_no': item.phoneNo,
                   'email': item.email,
                   'active': item.active == null ? null : (item.active! ? 1 : 0),
-                  'departmentId': item.departmentId
+                  'deptID': item.deptID
                 });
 
   final sqflite.DatabaseExecutor database;
@@ -164,40 +162,39 @@ class _$StudentDao extends StudentDao {
   final DeletionAdapter<Student> _studentDeletionAdapter;
 
   @override
-  Future<List<Student>> getAllStudents() async {
+  Future<List<Student>> getAllStu() async {
     return _queryAdapter.queryList('SELECT * FROM StudentX',
         mapper: (Map<String, Object?> row) => Student(
             id: row['id'] as int?,
-            name: row['full_name'] as String?,
+            name: row['full_name'] as String,
             phoneNo: row['phone_no'] as String?,
-            departmentId: row['departmentId'] as int?,
             email: row['email'] as String?,
-            active:
-                row['active'] == null ? null : (row['active'] as int) != 0));
+            active: row['active'] == null ? null : (row['active'] as int) != 0,
+            deptID: row['deptID'] as int?));
   }
 
   @override
-  Future<Student?> getOneStudent(int id) async {
-    return _queryAdapter.query('SELECT * FROM StudentX WHERE id = ?1',
+  Future<Student?> getOneStu(int student_id) async {
+    return _queryAdapter.query('SELECT * FROM StudentX WHERE id?1',
         mapper: (Map<String, Object?> row) => Student(
             id: row['id'] as int?,
-            name: row['full_name'] as String?,
+            name: row['full_name'] as String,
             phoneNo: row['phone_no'] as String?,
-            departmentId: row['departmentId'] as int?,
             email: row['email'] as String?,
-            active: row['active'] == null ? null : (row['active'] as int) != 0),
-        arguments: [id]);
+            active: row['active'] == null ? null : (row['active'] as int) != 0,
+            deptID: row['deptID'] as int?),
+        arguments: [student_id]);
   }
 
   @override
-  Future<int?> deleteStudent(int id) async {
-    return _queryAdapter.query('DELETE FROM StudentX WHERE id = ?1',
+  Future<int?> deleteStu(int id) async {
+    return _queryAdapter.query('DELETE FROM StudentX WHERE id?1',
         mapper: (Map<String, Object?> row) => row.values.first as int,
         arguments: [id]);
   }
 
   @override
-  Future<int?> deletAllStudent() async {
+  Future<int?> deleteAllStu() async {
     return _queryAdapter.query('DELETE FROM StudentX',
         mapper: (Map<String, Object?> row) => row.values.first as int);
   }
@@ -208,51 +205,51 @@ class _$StudentDao extends StudentDao {
         'SELECT * FROM StudentX WHERE full_name LIKE ?1',
         mapper: (Map<String, Object?> row) => Student(
             id: row['id'] as int?,
-            name: row['full_name'] as String?,
+            name: row['full_name'] as String,
             phoneNo: row['phone_no'] as String?,
-            departmentId: row['departmentId'] as int?,
             email: row['email'] as String?,
-            active: row['active'] == null ? null : (row['active'] as int) != 0),
+            active: row['active'] == null ? null : (row['active'] as int) != 0,
+            deptID: row['deptID'] as int?),
         arguments: [word]);
   }
 
   @override
-  Future<int> AddStudent(Student s) {
+  Future<int> addStu(Student s) {
     return _studentInsertionAdapter.insertAndReturnId(
         s, OnConflictStrategy.abort);
   }
 
   @override
-  Future<List<int>> AddStudentList(List<Student> s) {
+  Future<List<int>> addStuList(List<Student> s) {
     return _studentInsertionAdapter.insertListAndReturnIds(
         s, OnConflictStrategy.abort);
   }
 
   @override
-  Future<int> updateStudent(Student s) {
+  Future<int> updateStu(Student s) {
     return _studentUpdateAdapter.updateAndReturnChangedRows(
         s, OnConflictStrategy.abort);
   }
 
   @override
-  Future<int> updateStudentList(List<Student> s) {
+  Future<int> updateStuList(List<Student> s) {
     return _studentUpdateAdapter.updateListAndReturnChangedRows(
         s, OnConflictStrategy.abort);
   }
 
   @override
-  Future<int> deleteStudent2(Student s) {
+  Future<int> deleteStu2(Student s) {
     return _studentDeletionAdapter.deleteAndReturnChangedRows(s);
   }
 
   @override
-  Future<int> deleteStudentList(List<Student> s) {
+  Future<int> deleteStuList(List<Student> s) {
     return _studentDeletionAdapter.deleteListAndReturnChangedRows(s);
   }
 }
 
-class _$DepartmentDao extends DepartmentDao {
-  _$DepartmentDao(
+class _$DepartmentDAO extends DepartmentDAO {
+  _$DepartmentDAO(
     this.database,
     this.changeListener,
   )   : _queryAdapter = QueryAdapter(database),
@@ -287,29 +284,29 @@ class _$DepartmentDao extends DepartmentDao {
   final DeletionAdapter<Department> _departmentDeletionAdapter;
 
   @override
-  Future<List<Department>> getAllDepartments() async {
-    return _queryAdapter.queryList('SELECT * FORM Department',
+  Future<List<Department>> getAllDept() async {
+    return _queryAdapter.queryList('SELECT * FROM Department',
         mapper: (Map<String, Object?> row) =>
             Department(id: row['id'] as int?, name: row['name'] as String?));
   }
 
   @override
-  Future<Department?> getOneDepartment(int id) async {
-    return _queryAdapter.query('SELECT * FORM Department WHERE id = ?1',
+  Future<Department?> getOneDept(int dept_id) async {
+    return _queryAdapter.query('SELECT * FROM Department WHERE id ?1',
         mapper: (Map<String, Object?> row) =>
             Department(id: row['id'] as int?, name: row['name'] as String?),
-        arguments: [id]);
+        arguments: [dept_id]);
   }
 
   @override
-  Future<int?> deleteDepartment(int id) async {
-    return _queryAdapter.query('DELETE FROM Department WHERE id = ?1',
+  Future<int?> deleteDept(int id) async {
+    return _queryAdapter.query('DELETE FROM Department WHERE id ?1',
         mapper: (Map<String, Object?> row) => row.values.first as int,
         arguments: [id]);
   }
 
   @override
-  Future<int?> deletAllDepartment() async {
+  Future<int?> deleteAllDept() async {
     return _queryAdapter.query('DELETE FROM Department',
         mapper: (Map<String, Object?> row) => row.values.first as int);
   }
@@ -317,43 +314,43 @@ class _$DepartmentDao extends DepartmentDao {
   @override
   Future<List<Department>> searchByName(String word) async {
     return _queryAdapter.queryList(
-        'SELECT * FROM Department WHERE name LIKE ?1',
+        'SELECT * FROM Department WHERE full_name LIKE ?1',
         mapper: (Map<String, Object?> row) =>
             Department(id: row['id'] as int?, name: row['name'] as String?),
         arguments: [word]);
   }
 
   @override
-  Future<int> AddDepartment(Department s) {
+  Future<int> addDept(Department s) {
     return _departmentInsertionAdapter.insertAndReturnId(
         s, OnConflictStrategy.abort);
   }
 
   @override
-  Future<List<int>> AddDepartmentList(List<Department> s) {
+  Future<List<int>> addDeptList(List<Department> s) {
     return _departmentInsertionAdapter.insertListAndReturnIds(
         s, OnConflictStrategy.abort);
   }
 
   @override
-  Future<int> updateDepartment(Department s) {
+  Future<int> updateDept(Department s) {
     return _departmentUpdateAdapter.updateAndReturnChangedRows(
         s, OnConflictStrategy.abort);
   }
 
   @override
-  Future<int> updateDepartmentList(List<Department> s) {
+  Future<int> updateDeptList(List<Department> s) {
     return _departmentUpdateAdapter.updateListAndReturnChangedRows(
         s, OnConflictStrategy.abort);
   }
 
   @override
-  Future<int> deleteDepartment2(Department s) {
+  Future<int> deleteDept2(Department s) {
     return _departmentDeletionAdapter.deleteAndReturnChangedRows(s);
   }
 
   @override
-  Future<int> deleteDepartmentList(List<Department> s) {
+  Future<int> deleteDeptList(List<Department> s) {
     return _departmentDeletionAdapter.deleteListAndReturnChangedRows(s);
   }
 }
