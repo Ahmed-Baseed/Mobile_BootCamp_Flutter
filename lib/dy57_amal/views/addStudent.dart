@@ -16,15 +16,7 @@ class _Add_studentState extends State<Add_student> {
   TextEditingController studentName = TextEditingController();
   TextEditingController phoneNum = TextEditingController();
   bool isActive = false;
-  List<Department> list = [];
-  @override
-  // void initState() {
-  //   DBHelper.database.departmentDao.getAllDepartments().then((value) => list = value);
-  //   super.initState();
-  //   setState(() {
-      
-  //   });
-  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +70,24 @@ class _Add_studentState extends State<Add_student> {
                           labelStyle: TextStyle(color: Color(0xff3c6e71))),
                     ),
                     mediamSpace(),
-                    // DropdownButton(items: list.m,isExpanded: true, onChanged: (val){}),
+                    FutureBuilder(
+                      future:
+                          DBHelper.database.departmentDao.getAllDepartments(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return DropdownButton(
+                              value: snapshot.data![0].id,
+                              items: snapshot.data!
+                                  .map((e) => DropdownMenuItem(
+                                      value: e.id, child: Text(e.name!)))
+                                  .toList(),
+                              isExpanded: true,
+                              onChanged: (val) {});
+                        }else{
+                          return Text("no departments");
+                        }
+                      },
+                    ),
                     mediamSpace(),
                     CheckboxListTile(
                       title: Text('Active'),

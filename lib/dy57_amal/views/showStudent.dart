@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_bootcamp_flutter/day_32_movieUI_exercise/features/view/signinPage.dart';
 import 'package:mobile_bootcamp_flutter/dy57_amal/db_helper.dart';
+import 'package:mobile_bootcamp_flutter/dy57_amal/views/addStudent.dart';
 
 class ShowStudent extends StatefulWidget {
   const ShowStudent({super.key});
@@ -41,30 +43,49 @@ class _ShowStudentState extends State<ShowStudent> {
                       return ListView.builder(
                         itemCount: snapshot.data!.length,
                         itemBuilder: (context, index) {
-                          return ListTile(
-                              title: Text("${snapshot.data![index].name}"),
-                              subtitle:
-                                  Text("${snapshot.data![index].phoneNo}"),
-                              leading: Text("${snapshot.data![index].active}"),
-                              trailing: SizedBox(
-                                width: 96,
-                                child: Row(
-                                  children: [
-                                    IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(Icons.edit),
-                                    ),
-                                    IconButton(
-                                      onPressed: () {
-                                        DBHelper.database.studentDao
-                                            .deletAllStudent();
-                                        setState(() {});
-                                      },
-                                      icon: Icon(Icons.delete),
-                                    ),
-                                  ],
-                                ),
-                              ));
+                          return Column(
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    border: Border.all(
+                                        width: 1, color: Color(0xff3c6e71))),
+                                child: ListTile(
+                                    title:
+                                        Text("${snapshot.data![index].name}"),
+                                    subtitle: Text(
+                                        "${snapshot.data![index].phoneNo}"),
+                                    leading: snapshot.data![index].active ==
+                                            true
+                                        ? Icon(
+                                            Icons.circle,
+                                            color: Colors.green,
+                                          )
+                                        : Icon(Icons.circle, color: Colors.red),
+                                    trailing: SizedBox(
+                                      width: 96,
+                                      child: Row(
+                                        children: [
+                                          IconButton(
+                                            onPressed: () {},
+                                            icon: Icon(Icons.edit),
+                                          ),
+                                          IconButton(
+                                            onPressed: () {
+                                              DBHelper.database.studentDao
+                                                  .deleteStudent(snapshot
+                                                      .data![index].id!);
+                                              setState(() {});
+                                            },
+                                            icon: Icon(Icons.delete),
+                                          ),
+                                        ],
+                                      ),
+                                    )),
+                              ),
+                              mediamSpace()
+                            ],
+                          );
                         },
                       );
                     } else {
@@ -83,6 +104,16 @@ class _ShowStudentState extends State<ShowStudent> {
           )
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Color(0xff3c6e71),
+        child: Icon(Icons.add),
+        onPressed: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Add_student(),
+            ));
+      }),
     );
   }
 }

@@ -20,7 +20,7 @@ class Student {
   @ColumnInfo(name: 'phone_no')
   final String? phoneNo;
   final String? email;
-  final bool? active;
+   bool? active;
 
   final int? departmentId;
   @ignore
