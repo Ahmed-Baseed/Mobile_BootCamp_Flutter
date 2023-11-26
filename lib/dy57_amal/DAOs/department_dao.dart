@@ -3,9 +3,9 @@ import 'package:mobile_bootcamp_flutter/dy57_amal/entites/department.dart';
 
 @dao
 abstract class DepartmentDao {
-  @Query('SELECT * FORM Department')
+  @Query('SELECT * FROM Department')
   Future<List<Department>> getAllDepartments();
-  @Query('SELECT * FORM Department WHERE id = :id')
+  @Query('SELECT * FROM Department WHERE id = :id')
   Future<Department?> getOneDepartment(int id);
 
   @insert
