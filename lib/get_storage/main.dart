@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mobile_bootcamp_flutter/get_storage/result.dart';
+import 'package:mobile_bootcamp_flutter/get_storage/settings.dart';
 
 void main() async {
   await GetStorage.init();
@@ -34,9 +35,9 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: box.read('Dark')? ThemeData.dark():ThemeData.light(),
+      // theme: box.read('Dark')? ThemeData.dark():ThemeData.light(),
       debugShowCheckedModeBanner: false,
-      home: Result(),
+      home: Settings(),
       // home: Scaffold(
       //   body: Container(
       //     padding: EdgeInsets.all(20),

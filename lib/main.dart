@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_bootcamp_flutter/day_73/providerExercise/main_screen.dart';
 import 'package:mobile_bootcamp_flutter/dy57_amal/db_helper.dart';
+import 'package:mobile_bootcamp_flutter/get_storage/result.dart';
+import 'package:mobile_bootcamp_flutter/themeProvider/pageHome.dart';
+// import 'package:mobile_bootcamp_flutter/providerLecture/homeScreen.dart';
 // import 'package:mobile_bootcamp_flutter/dy57_amal/views/app_home_page.dart';
 // import 'package:mobile_bootcamp_flutter/hive_lecture/core/view/spalsh_screen.dart';
 
@@ -27,7 +31,7 @@ class _MyAppState extends State<MyApp> {
       //   appBar: AppBar(),
       // ),
       // home: AppHomePage(),
-      // home: Spalsh_sreen(),
+      home: HomeScreen(),
       // initialRoute: '/',
       // onGenerateRoute: RouteManager.generateRoute,
     );
