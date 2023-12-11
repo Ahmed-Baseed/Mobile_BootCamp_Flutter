@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:mobile_bootcamp_flutter/core/local_database/db_helper.dart';
+import 'package:mobile_bootcamp_flutter/features/views/homePage.dart';
 
-import 'day_26/exercise1.dart';
-import 'day_26/exercise2.dart';
-
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await DBHelper.initDatabase();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -15,7 +17,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AddWidgetsDynamically(),
+      home: HomePage(),
+        theme: ThemeData(
+          textTheme:
+          GoogleFonts.elMessiriTextTheme(Theme.of(context).textTheme),
+        ),
     );
   }
 }
